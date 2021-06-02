@@ -1,12 +1,12 @@
-FROM openjdk:8-jre-alpine
-
-ENV JMETER_VERSION=5.4.1
-ENV JMETER_HOME=/opt/jmeter
-ENV JMETER_DIR=${JMETER_HOME}/apache-jmeter-${JMETER_VERSION}
-
-RUN apk add --no-cache openssl ca-certificates wget tar
-
-WORKDIR ${JMETER_HOME}
+ FROM egaillardon/jmeter:5.2.1-1.0.0
+LABEL maintainer="emmanuel.gaillardon@orange.fr"
+ENV JMETER_PLUGINS_MANAGER_VERSION 1.4
+ENV CMDRUNNER_VERSION 2.2
+ENV JSON_LIB_VERSION 2.4
+ENV JSON_LIB_FULL_VERSION ${JSON_LIB_VERSION}-jdk15
+ENV NUMBER_OF_FILES_UNDER_LIB 166
+ENV NUMBER_OF_FILES_UNDER_LIB_EXT 81
+RUN cd /tmp/ \
 
 RUN wget -qO- http://ftp.ps.pl/pub/apache//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz | tar xvz && \
     wget -P ${JMETER_DIR}/lib/ext https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/0.10/jmeter-plugins-manager-0.10.jar && \
